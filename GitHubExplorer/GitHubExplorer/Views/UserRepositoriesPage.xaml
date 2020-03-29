@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GitHubExplorer.Views.UserRepositoriesPage"
+             xmlns:resources="clr-namespace:GitHubExplorer.PageResources"
+             xmlns:conv="clr-namespace:GitHubExplorer.Convertors"
+             xmlns:behaviours="clr-namespace:GitHubExplorer.Utils"
+             Title="{Binding UserName, Mode=TwoWay}"
+             BindingContext="{Binding UserRepositoriesPage, Source={StaticResource Locator}}"
+             >
+    <ContentPage.Behaviors>
+        <behaviours:EventToCommandBehavior EventName="Appearing" Command="{Binding OnAppearingCommand}" />
+    </ContentPage.Behaviors>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:Templates />
+                <resources:Styles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        <conv:TextToVisibilityConvertor x:Key="textVisibilityConvertor"/>
+        <conv:InverseBoolConvertor x:Key="inverseBoolConvertor"/>
+    </ContentPage.Resources>
+    
+    <Grid BackgroundColor="{StaticResource GridBgColor}">
+        <Grid Margin="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Style="{StaticResource statusLabelStyle}"
+                   IsVisible="{Binding SearchStatusText, Converter={StaticResource textVisibilityConvertor}}"
+                   Text="{Binding SearchStatusText}">
+            </Label>
+            <CollectionView Grid.Row="1" x:Name="repoCollection"
+                            ItemsSource="{Binding RepositoryList}"
+                            ItemTemplate="{StaticResource RepositoriesDataTemplate}"
+                            SelectionMode="None"
+                            SelectionChangedCommand="{Binding RepoSelectionChangeCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference repoCollection}}"
+                             >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </Grid>
+        <Grid IsVisible="{Binding IsLoaderRunning}" BackgroundColor="#40000000">
+            <ActivityIndicator Grid.Row="0" Grid.Column="0" IsRunning="{Binding IsLoaderRunning}"
+                               WidthRequest="60" HeightRequest="60" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GitHubExplorer.Views.HomePage"
+             xmlns:resources="clr-namespace:GitHubExplorer.PageResources"
+             xmlns:conv="clr-namespace:GitHubExplorer.Convertors"
+             xmlns:behaviours="clr-namespace:GitHubExplorer.Utils"
+             BindingContext="{Binding HomePage, Source={StaticResource Locator}}">
+    <ContentPage.Behaviors>
+        <behaviours:EventToCommandBehavior EventName="Appearing" Command="{Binding OnAppearingCommand}" />
+    </ContentPage.Behaviors>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:Templates />
+                <resources:Styles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        <conv:TextToVisibilityConvertor x:Key="textVisibilityConvertor"/>
+        <conv:InverseBoolConvertor x:Key="inverseBoolConvertor"/>
+    </ContentPage.Resources>
+    
+    <Shell.SearchHandler>
+        <SearchHandler x:Name="searchHandler"  Placeholder="Enter any Github username"
+                       ShowsResults="true" Query="{Binding SearchQuery, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"  
+                       Command="{Binding SearchCommand}" FontFamily="{StaticResource RalewayItalicFont}"
+                       CommandParameter="{Binding Source={x:Reference searchHandler}, Path=Query}"
+                       DisplayMemberName="Name" IsSearchEnabled="{Binding IsLoaderRunning, Converter={StaticResource inverseBoolConvertor}}"/>
+    </Shell.SearchHandler>
+
+    <Grid BackgroundColor="{StaticResource GridBgColor}">
+        <Grid Margin="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Style="{StaticResource statusLabelStyle}"
+                   IsVisible="{Binding SearchStatusText, Converter={StaticResource textVisibilityConvertor}}" >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding SearchStatusText}" TextColor="Black" />
+                        <Span Text="{Binding ClickableText}"
+                              TextColor="#3838ff"
+                              TextDecorations="Underline">  
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ClickableTextCommand}" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <!--SelectionChangedCommand="{Binding UserSelectionChangeCommand, Mode=TwoWay}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference userCollection}}"
+                            -->
+            <CollectionView Grid.Row="1" x:Name="userCollection"
+                            ItemsSource="{Binding UserList}"
+                            ItemTemplate="{StaticResource UserDataTemplate}"
+                            SelectionMode="Single"
+                             >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </Grid>
+
+        <Grid IsVisible="{Binding IsLoaderRunning}" BackgroundColor="#40000000">
+            <ActivityIndicator Grid.Row="0" Grid.Column="0" IsRunning="{Binding IsLoaderRunning}"
+                               WidthRequest="60" HeightRequest="60" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
+    </Grid>
+
+</ContentPage>

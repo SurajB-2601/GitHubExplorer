@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GitHubExplorer.App"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
+             xmlns:vm="clr-namespace:GitHubExplorer.ViewModels"
+             d1p1:Ignorable="d" 
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             >
+    <Application.Resources>
+        <Color x:Key="GridBgColor">#e1e2e1</Color>
+
+        <!--Application wide fonts-->
+        <OnPlatform x:Key="AgengSansFont" 
+                        x:TypeArguments="x:String" 
+                        iOS="agengsans" 
+                        Android="Fonts/agengsans.ttf#agengsans"
+                        />
+        <OnPlatform x:Key="RalewayItalicFont" 
+                        x:TypeArguments="x:String" 
+                        iOS="Raleway-Italic" 
+                        Android="Fonts/Raleway-It.ttf#Raleway-Italic"
+                        />
+        
+        <vm:ViewModelLocator x:Key="Locator" 
+                         d:IsDataSource="True" 
+                          />
+    </Application.Resources>
+</Application>

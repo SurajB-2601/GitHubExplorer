@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="GitHubExplorer.PageResources.Templates"
+                    xmlns:vm="clr-namespace:GitHubExplorer.ViewModels"
+                    xmlns:conv="clr-namespace:GitHubExplorer.Convertors">
+    
+    <conv:EmbeddedImageConvertor x:Key="embeddedImageConv" />
+    <DataTemplate x:Key="UserDataTemplate">
+        <Frame Margin="0, 0" HasShadow="False" OutlineColor="LightGray" CornerRadius="0">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=UserSelectionChangeCommand}"
+                                                      CommandParameter="{Binding}"/>
+            </Frame.GestureRecognizers>
+            <StackLayout Orientation="Horizontal" InputTransparent="True">
+                <Image Source="{Binding ImageUrl}" InputTransparent="True"
+                       HeightRequest="55" 
+                       WidthRequest="55"
+                       Aspect="AspectFill"/>
+                <StackLayout Orientation="Vertical" Margin="15, 0" InputTransparent="True">
+                    <Label Text="{Binding UserName}" 
+                           FontSize="20"
+                           TextColor="#3838ff"
+                           FontFamily="{StaticResource RalewayItalicFont}" 
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Name}" 
+                           FontSize="17"
+                           TextColor="Brown"
+                           FontFamily="{StaticResource AgengSansFont}"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RepositoriesDataTemplate">
+        <Frame Margin="0" HasShadow="False" OutlineColor="LightGray" CornerRadius="0" >
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="{conv:ImageResource GitHubExplorer.Images.repologo.jpg}" 
+                           HeightRequest="30" 
+                           WidthRequest="30"
+                           Aspect="AspectFill"/>
+                    <Label Text="{Binding Name}" Margin="5, 0" 
+                               FontSize="20"
+                               TextColor="#3838ff" MaxLines="1" LineBreakMode="TailTruncation"
+                               FontFamily="{StaticResource RalewayItalicFont}" 
+                               FontAttributes="Bold"/>
+                </StackLayout>
+                <Label Text="{Binding Description}" Margin="5, 5" 
+                               FontSize="14"
+                               TextColor="Brown" MaxLines="2" LineBreakMode="TailTruncation"
+                               FontFamily="{StaticResource AgengSansFont}"/>
+            </StackLayout>
+        </Frame>
+    </DataTemplate>
+</ResourceDictionary>
