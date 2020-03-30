@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
 using GitHubExplorer.Interfaces;
 using GitHubExplorer.Models;
 using GitHubExplorer.Resources;
@@ -101,7 +100,7 @@ namespace GitHubExplorer.ViewModels
                 else
                 {
                     SearchStatusText = string.Empty;
-                    UserList.Add(_mapper.Map<User, UserViewModel>(searchedUser));
+                    UserList.Add(_mapper.MapUserDTOToUserViewModel(searchedUser));
                 }
             }
             finally

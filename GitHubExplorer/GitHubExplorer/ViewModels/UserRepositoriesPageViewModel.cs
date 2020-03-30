@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
 using GitHubExplorer.Interfaces;
 using GitHubExplorer.Models;
 using GitHubExplorer.Resources;
@@ -75,7 +74,7 @@ namespace GitHubExplorer.ViewModels
                     SearchStatusText = string.Empty;
                     foreach (var repo in repos)
                     {
-                        RepositoryList.Add(_mapper.Map<Repository, RepositoryViewModel>(repo));
+                        RepositoryList.Add(_mapper.MapRepoDTOToRepoViewModel(repo));
                     }
                 }
             }

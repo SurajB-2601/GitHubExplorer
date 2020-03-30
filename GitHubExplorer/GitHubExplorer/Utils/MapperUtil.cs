@@ -1,4 +1,5 @@
-﻿using GitHubExplorer.Models;
+﻿using GitHubExplorer.Interfaces;
+using GitHubExplorer.Models;
 using GitHubExplorer.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,9 @@ using System.Text;
 
 namespace GitHubExplorer.Utils
 {
-    public class MapperUtil
+    public class MapperUtil: IMapper
     {
-        public static UserViewModel MapUserDTOToUserViewModel(User user, UserViewModel userVM)
+        public UserViewModel MapUserDTOToUserViewModel(User user, UserViewModel userVM)
         {
             if (userVM == null)
                 userVM = new UserViewModel();
@@ -19,7 +20,7 @@ namespace GitHubExplorer.Utils
             return userVM;
         }
 
-        public static RepositoryViewModel MapRepoDTOToRepoViewModel(Repository repo, RepositoryViewModel repoVM)
+        public RepositoryViewModel MapRepoDTOToRepoViewModel(Repository repo, RepositoryViewModel repoVM)
         {
             if (repoVM == null)
                 repoVM = new RepositoryViewModel();
