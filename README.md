@@ -1,7 +1,7 @@
 # GitHubExplorer
-Explore Github users and Repos
-Search any Github user by username
-Explore repositories of the user
+Explore Github users and Repos.
+Search any Github user by username.
+Explore repositories of the user.
 
 # Implementation details
 1. Two page app.
