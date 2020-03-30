@@ -11,3 +11,6 @@ Explore repositories of the user.
 5. Used Xamarin behaviours for event to command behaviour
 6. Used seperate repository hosting inferface, to facilitate easy extension to GitLab, BitBucket etc.
 7. Used C# asynchronous programming.
+
+You can refer the below screenshots:
+<img src="https://github.com/SurajB-2601/GitHubExplorer/blob/master/screenshots/1.png" height="300" /> 
