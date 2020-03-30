@@ -10,4 +10,4 @@ Explore repositories of the user.
 4. Implemented localisation
 5. Used Xamarin behaviours for event to command behaviour
 6. Used seperate repository hosting inferface, to facilitate easy extension to GitLab, BitBucket etc.
-
+7. Used C# asynchronous programming.
