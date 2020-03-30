@@ -13,4 +13,4 @@ Explore repositories of the user.
 7. Used C# asynchronous programming.
 
 You can refer the below screenshots:
-<img src="https://github.com/SurajB-2601/GitHubExplorer/blob/master/screenshots/1.png" height="300" /> 
+<img src="https://github.com/SurajB-2601/GitHubExplorer/blob/master/screenshots/5.png" height="400" /> 
