@@ -30,7 +30,6 @@ namespace GitHubExplorer.Utils
             repoVM.Language = repo.language;
             repoVM.StargazersCount = repo.stargazers_count;
             repoVM.ForksCount = repo.forks_count;
-            repoVM.RepoImageURL = "repologo.png";
             return repoVM;
         }
     }

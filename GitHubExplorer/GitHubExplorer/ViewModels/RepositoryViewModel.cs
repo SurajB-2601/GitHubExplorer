@@ -12,6 +12,5 @@ namespace GitHubExplorer.ViewModels
         public string Language { get; set; }
         public int StargazersCount { get; set; }
         public int ForksCount { get; set; }
-        public string RepoImageURL { get; set; }
     }
 }
